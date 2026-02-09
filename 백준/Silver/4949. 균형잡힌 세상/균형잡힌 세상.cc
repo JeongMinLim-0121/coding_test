@@ -1,0 +1,46 @@
+#include <iostream>
+#include <string>
+#include <vector>
+#include <algorithm>
+#include <cmath>
+#include <stack>
+using namespace std;
+ 
+
+int main() {
+    ios::sync_with_stdio(false);
+    cin.tie(nullptr);
+
+    string str;
+    while (getline(cin, str)) {
+        if (str == ".") break;
+
+        stack<char> st;
+        bool ok = true;
+
+        for (char c : str) {
+            if (c == '(' || c == '[') {
+                st.push(c);
+            }
+            else if (c == ')') {
+                if (st.empty() || st.top() != '(') {
+                    ok = false;
+                    break;
+                }
+                st.pop();
+            }
+            else if (c == ']') {
+                if (st.empty() || st.top() != '[') {
+                    ok = false;
+                    break;
+                }
+                st.pop();
+            }
+        }
+        if (!st.empty()) ok = false;
+        cout << (ok ? "yes \n" : "no \n");
+    }
+     
+
+    return 0;
+}
